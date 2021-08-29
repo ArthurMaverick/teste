@@ -1,5 +1,6 @@
 const path = require('node:path')
-const relativePath = path.join(__dirname, '**', 'infra', 'repository', 'postgres')
+const prodPath = path.join('dist', 'infra', 'repository', 'postgres')
+const devPath = path.join('src', 'infra', 'repository', 'postgres')
 require('dotenv').config()
 
 module.exports = [
@@ -11,16 +12,19 @@ module.exports = [
     username: process.env.PROD_USERNAME,
     password: process.env.PROD_PASSWORD,
     database: process.env.PROD_DATABASE,
-    entities: [relativePath + 'models/*.{ts, js}']
-    // migrations: [relativePath]
+    entities: [prodPath + '/models/*.js'],
+    migrations: [prodPath + 'postgresMigrations/*.js'],
+    cli: { migrationsDir: prodPath + 'postgresMigrations' }
   },
   {
-    name: 'DevelopmentDB',
-    type: process.env.DEV_TYPE,
-    host: process.env.DEV_HOST,
-    port: process.env.DEV_PORT,
-    username: process.env.DEV_USERNAME,
-    password: process.env.DEV_PASSWORD,
-    database: process.env.DEV_DATABASE,
-    entities: [relativePath + '.login.{ts, js}', relativePath + '.subscriber.{ts, js}']
+    name: 'developmentDB',
+    type: 'postgres',
+    host: 'localhost',
+    port: 5432,
+    username: 'test',
+    password: '123456',
+    database: 'panicLobter',
+    entities: [devPath + '/models/*.ts'],
+    migrations: [devPath + 'postgresMigrations/*.ts'],
+    cli: { migrationsDir: devPath + 'postgresMigrations' }
   }]

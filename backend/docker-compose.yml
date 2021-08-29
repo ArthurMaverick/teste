@@ -5,12 +5,13 @@ services:
     image: 'postgres:latest'
     restart: always
     environment:
+      POSTGRES_HOSTNAME: 'localhost'
       POSTGRES_PASSWORD: 123456
       POSTGRES_USER: test
-      POSTGRES_DB: test42
-    
+      POSTGRES_DB: panicLobter
+      
     ports:
-      - '8080:5432'  
+      - '5432:5432'  
 
    
    

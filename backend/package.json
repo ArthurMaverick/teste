@@ -5,15 +5,14 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/main/server.ts",
-    "build": "rm -rf dist && rm tsconfig.tsbuildinfo && tsc",
-    "up": "npm run build && docker-compose up -d",
-    "down": "docker-compose down && rm -rf dist",
-    "start:dev": "docker-compose up -d && npm run build && node dist/main/server.js",
-    "start:prod": "node dist/main/server.js",
+    "down": "docker-compose down && rm -rf dist && rm tsconfig.tsbuildinfo",
+    "build": "tsc",
+    "start:dev": "docker-compose up -d && ts-node-dev --respawn --transpile-only src/main/server.ts",
+    "start": "node dist/main/server.js",
     "test": "jest --watchAll",
     "test:staged": "jest --passWithNoTests",
     "test:ci": "jest --coverage",
-    "prepare": "husky install",
+    
     "test:coveralls": "jest --coverage && coveralls < coverage/lcov.info"
   },
   "keywords": [
@@ -43,9 +42,9 @@
     "eslint-plugin-jest": "^24.3.6",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
-    "husky": "^6.0.0",
+    
     "jest": "^27.0.4",
-    "lint-staged": "^11.0.0",
+    
     "ts-jest": "^27.0.3",
     "ts-node-dev": "^1.1.6",
     "typescript": "^4.3.4"
@@ -63,11 +62,6 @@
     "typeorm": "^0.2.37",
     "uuid": "^3.4.0",
     "validator": "^13.6.0"
-  },
-  "lint-staged": {
-    "*.ts": [
-      "eslint --fix",
-      "npm run test:staged"
-    ]
   }
+ 
 }
