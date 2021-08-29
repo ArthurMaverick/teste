@@ -1,9 +1,13 @@
-import { Entity, PrimaryColumn, Column } from 'typeorm'
+import { Entity, PrimaryColumn, Column, OneToOne } from 'typeorm'
+import { Login } from './login'
 
 @Entity('subscriber')
 export class Subscriber {
   @PrimaryColumn({ type: 'varchar' })
   id!: string
+
+  @OneToOne(() => Login, login => login.subscriber)
+  login: Login;
 
   @Column({ type: 'varchar' })
   email!: string
