@@ -6,11 +6,11 @@ export class EmailExists implements IEmailExists {
     private readonly pgSubscribeRepo = getRepository(Subscriber)
 
     async checkByEmail (email: string): Promise<boolean> {
-      const exists = await this.pgSubscribeRepo.findOne(email)
-      if (exists.email !== undefined) {
-        console.log(exists)
-        return Boolean(exists)
+      const exists = await this.pgSubscribeRepo.findOne({ where: { email } })
+      console.log('sub check', email, 'return', exists.email)
+      if (exists) {
+        return false
       }
-      return Boolean(exists)
+      return true
     }
 }

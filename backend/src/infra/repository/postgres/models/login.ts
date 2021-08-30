@@ -10,9 +10,15 @@ export class Login {
   @JoinColumn()
   subscriber: Subscriber;
 
-  @Column({ type: 'varchar' })
-  email!: string
+  @Column({ type: 'varchar', nullable: true })
+  email?: string
 
   @Column({ type: 'varchar' })
   discordId!: string
+
+  @Column({ type: 'varchar' })
+  access_token!: string
+
+  @Column({ type: 'varchar' })
+  token_type!: string
 }

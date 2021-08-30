@@ -1,7 +1,7 @@
 import { Controller, HttpResponse, Validation } from '../rules'
 import { badRequest, serverError, ok, forbidden } from '../helpers/http-helper'
 import { EmailInUseError } from '../errors/email-in-use-error'
-import { Subscribe, AddSub } from '../../domain/usecases'
+import { Subscribe } from '../../domain/usecases'
 export class CreateSubscriberController implements Controller {
   constructor (
     private readonly validation: Validation,
@@ -9,13 +9,12 @@ export class CreateSubscriberController implements Controller {
 
   ) {}
 
-  async handle (request: AddSub.Params): Promise<HttpResponse> {
+  async handle (request: any): Promise<HttpResponse> {
     try {
       const error = this.validation.validate(request)
       if (error) {
         return badRequest(error)
       }
-
       const dataOrNull = await this.dbAddUser.createSub(request)
 
       if (!dataOrNull) {

@@ -8,8 +8,9 @@ type InsertSubscribeResult = AddLoginRepository.Result
 export class InsertLoginRepository implements AddLoginRepository {
   private readonly insertLoginRepo = getRepository(Login)
   async addLogin (LoginData: InsertSubscribeParam): Promise<InsertSubscribeResult> {
+    // console.log('addlogi', LoginData)
     const insertRes = this.insertLoginRepo.save(LoginData)
-    console.log(insertRes)
+    console.log('response database', insertRes)
     return Boolean(insertRes) || false
   }
 }

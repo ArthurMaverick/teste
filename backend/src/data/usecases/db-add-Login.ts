@@ -16,14 +16,14 @@ export class DbAddLogin implements UserLogin {
   async userLogin (userwithouID: Login.Params): Promise<Login.Result> {
     const exists = await this.checkSubEmail.checkByEmail(userwithouID.email)
 
-    if (exists) {
+    if (!exists) {
       const uuid = this.addId.uuid()
-      const id = await this.discordID.getClientID(userwithouID.code)
-      const userWithId = { id: uuid, email: userwithouID.email, discordId: id }
+      const { access_token, code, discordId, token_type } = await this.discordID.getClientID(userwithouID.code)
+      const userWithId = { id: uuid, email: userwithouID.email, access_token, code, discordId, token_type }
       const dbResponse = this.add.addLogin(userWithId)
       return dbResponse
     }
 
-    return !exists && true
+    return true
   }
 }

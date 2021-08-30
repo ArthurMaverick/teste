@@ -14,14 +14,12 @@ export class DbAddSubscriber implements Subscribe {
 
   async createSub (subwithouID: AddSub.Params): Promise<AddSub.Result> {
     const exists = await this.checkEmail.checkByEmail(subwithouID.email)
-
-    if (!exists) {
+    if (exists) {
       const uuid = this.addId.uuid()
       const subWithId = { ...subwithouID, id: uuid }
       const dbResponse = this.add.addSub(subWithId)
       return dbResponse
     }
-
-    return exists && true
+    return exists
   }
 }

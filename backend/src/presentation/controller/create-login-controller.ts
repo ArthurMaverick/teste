@@ -1,7 +1,7 @@
 import { Controller, HttpResponse, Validation } from '../rules'
 import { badRequest, serverError, ok, forbidden } from '../helpers/http-helper'
 import { EmailInUseError } from '../errors/email-in-use-error'
-import { UserLogin, Login } from '../../domain/usecases'
+import { UserLogin } from '../../domain/usecases'
 export class CreateLoginController implements Controller {
   constructor (
     private readonly validation: Validation,
@@ -9,9 +9,10 @@ export class CreateLoginController implements Controller {
 
   ) {}
 
-  async handle (request: Login.Params): Promise<HttpResponse> {
+  async handle (request: any): Promise<HttpResponse> {
     try {
       const error = this.validation.validate(request)
+
       if (error) {
         return badRequest(error)
       }
