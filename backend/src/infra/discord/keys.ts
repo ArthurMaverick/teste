@@ -1,8 +1,9 @@
+require('dotenv').config()
 
-export const credentials = {
-  client_id: '881056837099716668',
-  client_secret: 'xOTDMB8Kvg9xmbvBLS9CuLgnl0nHhFzN',
-  grant_type: 'authorization_code',
-  redirect_uri: 'http://localhost:8000/v1/any',
-  scope: 'identify'
+export const crendentials = {
+  client_id: process.env.CLIENT_ID,
+  client_secret: process.env.CLIENT_SECRET,
+  grant_type: process.env.CLIENT_GRANT_TYPE,
+  redirect_uri: process.env.REDIRECT_URI,
+  scope: process.env.CLIENT_SCOPE
 }

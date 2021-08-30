@@ -7,7 +7,6 @@ export const adaptRoute = (controller: Controller) => {
       ...(req.body || {}),
       ...(req.query || {})
     }
-    // console.log(request)
     const { body, statuscode } = await controller.handle(request)
 
     if (Number(statuscode) >= 200 && Number(statuscode) <= 299) {

@@ -1,13 +1,9 @@
-import { Entity, PrimaryColumn, Column, OneToOne } from 'typeorm'
-import { Login } from './login'
+import { Entity, PrimaryColumn, Column } from 'typeorm'
 
 @Entity('subscriber')
 export class Subscriber {
   @PrimaryColumn({ type: 'varchar' })
   id!: string
-
-  @OneToOne(() => Login, login => login.subscriber)
-  login: Login;
 
   @Column({ type: 'varchar' })
   email!: string
@@ -20,7 +16,4 @@ export class Subscriber {
 
   @Column({ type: 'varchar' })
   city!: string
-
-  // @CreateDateColumn({default: 'now()'})
-  // createdAt!: Date
 }
