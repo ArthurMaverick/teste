@@ -1,5 +1,5 @@
 import { Login, UserLogin } from '../../domain/usecases'
-import { AddLoginRepository } from '../rules'
+import { AddLoginRepository, DiscordClientInfo } from '../rules'
 import {
   AddId,
   IEmailExists
@@ -8,20 +8,22 @@ import {
 export class DbAddLogin implements UserLogin {
   constructor (
       private readonly addId: AddId,
-      private readonly checkEmail: IEmailExists,
+      private readonly checkSubEmail: IEmailExists,
+      private readonly discordID: DiscordClientInfo,
       private readonly add: AddLoginRepository
   ) {}
 
   async userLogin (userwithouID: Login.Params): Promise<Login.Result> {
-    const exists = await this.checkEmail.checkByEmail(userwithouID.email)
+    const exists = await this.checkSubEmail.checkByEmail(userwithouID.email)
 
-    if (!exists) {
+    if (exists) {
       const uuid = this.addId.uuid()
-      const userWithId = { ...userwithouID, id: uuid }
+      const id = await this.discordID.getClientID(userwithouID.code)
+      const userWithId = { id: uuid, email: userwithouID.email, discordId: id }
       const dbResponse = this.add.addLogin(userWithId)
       return dbResponse
     }
 
-    return exists && true
+    return !exists && true
   }
 }

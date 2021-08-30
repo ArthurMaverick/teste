@@ -1,7 +1,7 @@
-type AddUserSubscribe = {
+type AddUserLogin = {
   id: string,
   email: string,
-  discordId: string,
+  code: string,
 }
 
 export interface AddLoginRepository {
@@ -10,6 +10,6 @@ export interface AddLoginRepository {
 
 export namespace AddLoginRepository {
 
-  export type Params = AddUserSubscribe
+  export type Params = AddUserLogin
   export type Result = boolean
 }

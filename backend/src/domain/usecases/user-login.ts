@@ -1,7 +1,7 @@
 export namespace Login {
   export type Params = {
     email: string,
-    discordId: string,
+    code: string,
   }
 
   export type Result = object | boolean

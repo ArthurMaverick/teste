@@ -3,5 +3,5 @@ export interface IEmailExists {
 }
 
 export namespace IEmailExists {
-  export type Result = boolean
+  export type Result = boolean;
 }

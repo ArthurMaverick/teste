@@ -1,4 +1,5 @@
 export type Login = {
+  id: string,
   email: string
-  discordId: string,
+  code: string,
 }
