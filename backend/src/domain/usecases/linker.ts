@@ -5,7 +5,7 @@ export type EmailLinker = {
 }
 
 export namespace EmailLinker {
-  export type Params = Omit<Linker, 'discordUserInfo' | 'id'>
+  export type Params = Omit<Linker, 'login' | 'id'>
 
   export type Result = Promise<boolean>
 }
