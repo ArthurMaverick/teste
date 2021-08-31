@@ -6,6 +6,7 @@ export class AddEmail implements IdataEmaillinker {
     private readonly addEmail = getRepository(Linker)
     async addLinkerEMail (args: IdataEmaillinker.Params): IdataEmaillinker.Result {
       const payload = await this.addEmail.save(args)
-      return !!payload || false
+      console.log('db', payload)
+      return Boolean(payload) || false
     }
 }

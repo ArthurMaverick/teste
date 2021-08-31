@@ -1,8 +1,8 @@
-import { Controller } from '../../../presentation'
-import { CreateEmailController } from '../../../presentation/controller/create-email-controller'
 import { makeLinkerUsecase } from '../services'
 import { makeLinkerValidation } from '../validations'
+import { Controller } from '../../../presentation'
+import { CreateEmailController } from '../../../presentation/controller'
 
-export const maleGetEmailLinker = (): Controller => {
-  return new CreateEmailController(makeLinkerUsecase(), makeLinkerValidation())
+export const makeGetEmailLinker = (): Controller => {
+  return new CreateEmailController(makeLinkerValidation(), makeLinkerUsecase())
 }

@@ -1,7 +1,8 @@
-import { maleGetEmailLinker } from '../factories/controllers/getEmailController'
-import { adaptRoute } from '../adapters/express-router-adapter'
 import { Router } from 'express'
+import { adaptRoute } from '../adapters/express-router-adapter'
+import { makeGetEmailLinker } from '../factories/controllers/getEmailController'
 
 export default (router: Router) => {
-  router.post('/emailreceiver', adaptRoute(maleGetEmailLinker()))
+  router.post('/emailreceiver', adaptRoute(makeGetEmailLinker()))
 }
+//

@@ -5,17 +5,25 @@ import { EmailInUseError } from '../errors'
 
 export class CreateEmailController implements Controller {
   constructor (
-    private readonly add: EmailLinker,
-    private readonly validator: Validation
+    private readonly validation: Validation,
+    private readonly add: EmailLinker
   ) {}
 
-  async handle (args: EmailLinker.Params): Promise<HttpResponse> {
+  async handle (request: EmailLinker.Params): Promise<HttpResponse> {
+    console.log('argsController', request)
     try {
-      const isValid = this.validator.validate(args)
-      if (!isValid) return badRequest(isValid)
+      const isValid = this.validation.validate(request)
+      console.log('isValid', isValid)
 
-      const payload = await this.add.link(args)
-      if (!payload) return forbidden(new EmailInUseError())
+      if (isValid) {
+        return badRequest(isValid)
+      }
+
+      const payload = await this.add.link(request)
+      if (!payload) {
+        console.log('argsController1')
+        return forbidden(new EmailInUseError())
+      }
 
       ok(payload)
     } catch (err) {

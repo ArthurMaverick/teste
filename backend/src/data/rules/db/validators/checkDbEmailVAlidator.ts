@@ -1,10 +1,10 @@
-import { Linker } from '../../../../domain/entities/linker'
+// import { Linker } from '../../../../domain/entities/linker'
 
 export interface ICheckDbEmailValidator {
-   checkEmailByLinker(args: ICheckDbEmailValidator.Params): ICheckDbEmailValidator.Result
+   checkEmailByLinker(args:string): Promise<boolean>
 }
 
-export namespace ICheckDbEmailValidator{
-  export interface Params extends Omit<Linker, 'id' | 'login'> {}
-  export type Result = Promise<boolean>
-}
+// export namespace ICheckDbEmailValidator{
+//   export type Params = Omit<Linker, 'id' | 'login'>
+//   export type Result = Promise<boolean>
+// }

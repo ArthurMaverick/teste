@@ -7,12 +7,13 @@ export const adaptRoute = (controller: Controller) => {
       ...(req.body || {}),
       ...(req.query || {})
     }
+    console.log('Main/adpater: ', request)
     const { body, statuscode } = await controller.handle(request)
 
     if (Number(statuscode) >= 200 && Number(statuscode) <= 299) {
       res.status(Number(statuscode)).json(body)
     } else {
-      res.status(Number(statuscode)).json({ error: body.message })
+      res.status(Number(statuscode)).json({ error: body?.message })
     }
   }
 }

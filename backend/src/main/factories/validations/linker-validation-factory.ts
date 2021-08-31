@@ -1,12 +1,11 @@
-import { EmailValidatorAdpter } from '../../../infra/validators/email-validator-adapter'
 import { Validation } from '../../../presentation'
 import { ValidationComposite, EmailValidation, RequiredFieldValidation } from '../../../validations/validators'
-export const makeLinkerValidation = () => {
-  const validatons: Validation[] = []
-
-  for (const fields of ['email']) {
-    validatons.push(new RequiredFieldValidation(fields))
+import { EmailValidatorAdpter } from '../../../infra/validators/email-validator-adapter'
+export const makeLinkerValidation = (): ValidationComposite => {
+  const validations: Validation[] = []
+  for (const field of ['email']) {
+    validations.push(new RequiredFieldValidation(field))
   }
-  validatons.push(new EmailValidation('email', new EmailValidatorAdpter()))
-  return new ValidationComposite(validatons)
+  validations.push(new EmailValidation('email', new EmailValidatorAdpter()))
+  return new ValidationComposite(validations)
 }

@@ -5,10 +5,10 @@ import { getRepository } from 'typeorm'
 export class CheckDbLinkerEmailValidator implements ICheckDbEmailValidator {
   private readonly email = getRepository(Linker)
 
-  async checkEmailByLinker (args: ICheckDbEmailValidator.Params): ICheckDbEmailValidator.Result {
-    const payload = await this.email.findOne({ where: { args } })
+  async checkEmailByLinker (email: string): Promise<boolean> {
+    console.log('emailLinker', email)
+    const payload = await this.email.findOne({ where: { email } })
     if (payload) {
-      console.log('emailLinker', payload)
       return false
     }
     return true

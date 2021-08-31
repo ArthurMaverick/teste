@@ -5,6 +5,6 @@ export interface IdataEmaillinker {
 }
 
 export namespace IdataEmaillinker {
-  export interface Params extends Omit<Linker, 'id' | 'login'> {}
+  export type Params = Omit<Linker, 'id' | 'login'>
   export type Result = Promise<boolean>
 }

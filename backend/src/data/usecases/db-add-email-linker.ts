@@ -8,9 +8,13 @@ export class DbEmailLinker implements EmailLinker {
     private readonly Email: ICheckDbEmailValidator) {}
 
   async link (args: EmailLinker.Params): EmailLinker.Result {
-    const exists = await this.Email.checkEmailByLinker(args)
-    if (!exists) return false
+    console.log(args)
+    const exists = await this.Email.checkEmailByLinker(args.email) //
+    if (!exists) {
+      return false
+    }
 
+    console.log('argsServices', args)
     const payload = await this.linker.addLinkerEMail(args)
     return payload
   }
