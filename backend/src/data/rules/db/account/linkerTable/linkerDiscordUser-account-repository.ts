@@ -5,6 +5,6 @@ export interface IdataEmaillinker {
 }
 
 export namespace IdataEmaillinker {
-  export type Params = Linker
+  export type Params = Omit<Linker, 'id' | 'discordUserInfo'>
   export type Result = Promise<boolean>
 }

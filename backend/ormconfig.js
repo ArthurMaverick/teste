@@ -11,7 +11,7 @@ module.exports = [
     username: process.env.PROD_USERNAME,
     password: process.env.PROD_PASSWORD,
     database: process.env.PROD_DATABASE,
-    entities: [prodPath + '/models/*.{ts,js}'],
-    migrations: [prodPath + '/postgresMigrations/*.{ts,js}'],
+    entities: [prodPath + '/models/*.ts'],
+    migrations: [prodPath + '/postgresMigrations/*.ts'],
     cli: { migrationsDir: prodPath + '/postgresMigrations' }
   }]

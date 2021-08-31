@@ -1,19 +1,24 @@
-import { Entity, PrimaryColumn, Column } from 'typeorm'
+import { Linker } from './linker'
+import { Entity, PrimaryColumn, Column, JoinColumn, OneToOne } from 'typeorm'
 
 @Entity('subscriber')
 export class Subscriber {
-  @PrimaryColumn({ type: 'varchar' })
+  @PrimaryColumn()
   id!: string
 
-  @Column({ type: 'varchar' })
+  @Column()
   email!: string
 
-  @Column({ type: 'varchar' })
+  @Column()
   birthData!: string
 
-  @Column({ type: 'varchar' })
+  @Column()
   state!: string
 
-  @Column({ type: 'varchar' })
+  @Column()
   city!: string
+
+  @OneToOne(() => Linker, { eager: true, nullable: true })
+  @JoinColumn()
+  linker: Linker
 }

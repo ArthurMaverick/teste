@@ -1,8 +1,10 @@
-// import { IdataEmaillinker } from '../rules/db/account'
-import {} from '../rules/cryptography/add-id'
+import { IdataEmaillinker } from '../rules/db/account'
+import { EmailLinker } from '../../domain/usecases'
+export class DbEmailLinker implements EmailLinker {
+  private readonly Linker: IdataEmaillinker
 
-// export class DbEmailLinker implements IdataEmaillinker {
-//   async addLinkerEMail (args: IdataEmaillinker.Params): Promise<IdataEmaillinker.Result> {
-
-//   }
-// }
+  async link (args: EmailLinker.Params): EmailLinker.Result {
+    const payload = await this.Linker.addLinkerEMail(args)
+    return payload
+  }
+}
