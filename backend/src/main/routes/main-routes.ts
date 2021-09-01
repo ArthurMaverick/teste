@@ -1,7 +1,7 @@
 
 import { Router } from 'express'
-import { adaptRoute } from '../adapters/express-router-adapter'
+import { adaptRouteHeaders } from '../adapters/express-router-adapter-header'
 import { makeAddLoginInfoController } from '../factories/controllers/getLoginloginController'
 export default (router: Router) => {
-  router.get('/any?', adaptRoute(makeAddLoginInfoController()))
+  router.get('/any?', adaptRouteHeaders(makeAddLoginInfoController()))
 }

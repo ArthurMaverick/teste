@@ -9,6 +9,6 @@ export class InsertSubscriberRepository implements IAddSubscriberServices {
   async addSubscriber (clientParams: InsertSubscribeParams): Promise<InsertSubscribeResult> {
     const insertRes = await this.insertRepo.save(clientParams)
     console.log(insertRes)
-    return Boolean(insertRes) || false // TODO remove false
+    return !!insertRes // TODO remove false
   }
 }

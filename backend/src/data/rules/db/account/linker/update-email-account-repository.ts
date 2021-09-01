@@ -5,6 +5,8 @@ export interface IUpdateDataService {
 }
 
 export namespace IUpdateDataService {
-  export type Params = Omit<Linker, 'email'>
+  type Identify = {id: string}
+  export type Params = Linker & Identify
   export type Result = Promise<boolean>
+
 }

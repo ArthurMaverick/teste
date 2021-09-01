@@ -6,5 +6,5 @@ export interface ISelectDataService {
 
 export namespace ISelectDataService {
   export type Params = Omit<Linker, 'discordId'>
-  export type Result = Promise<boolean>
+  export type Result = Promise<boolean | string >
 }

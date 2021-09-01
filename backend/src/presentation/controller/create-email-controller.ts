@@ -22,7 +22,7 @@ export class CreateEmailController implements Controller {
         return forbidden(new EmailInUseError())
       }
 
-      ok(payload)
+      return ok(payload)
     } catch (err) {
       console.log(err)
       serverError(err.name)

@@ -15,8 +15,8 @@
     "test:coveralls": "jest --coverage && coveralls < coverage/lcov.info",
     "typeorm:run": "npx ts-node-dev --transpile-only ./node_modules/typeorm/cli.js migration:run",
     "typeorm:rever": "npx ts-node-dev --transpile-only ./node_modules/typeorm/cli.js migration:revert",
-    "typeorm:gen": "npx ts-node-dev --transpile-only ./node_modules/typeorm/cli.js migration:generate -- -n createClass",
-    "typeorm:cre": "npx ts-node-dev --transpile-only ./node_modules/typeorm/cli.js migration:create -n createClass"
+    "typeorm:gen": "npx ts-node-dev --transpile-only ./node_modules/typeorm/cli.js migration:generate -- -n createClass1",
+    "typeorm:cre": "npx ts-node-dev --transpile-only ./node_modules/typeorm/cli.js migration:create -n createClass1"
 
     
   },

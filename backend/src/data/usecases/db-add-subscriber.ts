@@ -11,12 +11,14 @@ export class DbAddSubscriberServices implements ISubscribe {
 
   async createSub (subwithouID: ISubscribe.Params): Promise<ISubscribe.Result> {
     const exists = await this.find.email(subwithouID)
-    if (exists) {
+    console.log('check', exists)
+
+    if (!exists) {
       const uuid = this.addId.uuid()
       const subWithId = { ...subwithouID, id: uuid }
       const dbResponse = this.add.addSubscriber(subWithId)
-      return dbResponse
+      return !!dbResponse
     }
-    return exists
+    return false
   }
 }

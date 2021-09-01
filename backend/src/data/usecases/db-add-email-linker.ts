@@ -9,8 +9,16 @@ export class DbLinkerServices implements ILinker {
   async checkEmailAndSetDiscordID (args: ILinker.Params): ILinker.Result {
     const trueOrFalse = await this.select.email(args)
 
-    return trueOrFalse
-      ? await this.update.discordId(args)
-      : trueOrFalse
+    if (!trueOrFalse && typeof trueOrFalse === 'boolean') {
+      return false
+    }
+
+    if (typeof trueOrFalse === 'string') {
+      const payload = { ...args, id: trueOrFalse }
+      await this.update.discordId(payload)
+      return true
+    }
+
+    console.log('final state', trueOrFalse)
   }
 }

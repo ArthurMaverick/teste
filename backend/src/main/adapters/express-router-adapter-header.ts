@@ -1,7 +1,7 @@
 import { Controller } from '../../presentation/rules'
 import { Request, Response } from 'express'
 
-export const adaptRoute = (controller: Controller) => {
+export const adaptRouteHeaders = (controller: Controller) => {
   return async (req: Request, res: Response) => {
     const request = {
       ...(req.body || {}),
@@ -13,6 +13,7 @@ export const adaptRoute = (controller: Controller) => {
     if (Number(statuscode) >= 200 && Number(statuscode) <= 299) {
       res.status(Number(statuscode))
       res.cookie('ids', body, { maxAge: 24 * 60 * 60 })
+      return res.json({ status: 200 })
     } else {
       res.status(Number(statuscode)).json({ error: body?.message })
     }

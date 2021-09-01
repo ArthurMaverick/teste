@@ -4,8 +4,12 @@ import { getRepository } from 'typeorm'
 
 export class FindDbLinkerEmailValidator implements ISelectDataService {
     private readonly repo = getRepository(Subscriber)
-    async email (email: ISelectDataService.Params): ISelectDataService.Result {
-      const exists = await this.repo.findOne({ where: { email } })
-      return !!exists
+    async email ({ email }: ISelectDataService.Params): ISelectDataService.Result {
+      const exists = await this.repo.findOne({ where: { email: email } })
+      console.log('SELECT', exists)
+
+      return exists
+        ? exists.id
+        : false
     }
 }
