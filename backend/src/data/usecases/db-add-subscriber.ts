@@ -1,23 +1,20 @@
-import { AddSub, Subscribe } from '../../domain/usecases'
-import { AddSubscribeRepository } from '../rules'
-import {
-  AddId,
-  IEmailExists
-} from '../rules/db'
+import { ISubscribe } from '../../domain/usecases'
+import { IAddSubscriberServices, ISelectSubscriberDataService } from '../rules/db/account/subscriber'
+import { AddId } from '../rules/db'
 
-export class DbAddSubscriber implements Subscribe {
+export class DbAddSubscriberServices implements ISubscribe {
   constructor (
       private readonly addId: AddId,
-      private readonly checkEmail: IEmailExists,
-      private readonly add: AddSubscribeRepository
+      private readonly find: ISelectSubscriberDataService,
+      private readonly add: IAddSubscriberServices
   ) {}
 
-  async createSub (subwithouID: AddSub.Params): Promise<AddSub.Result> {
-    const exists = await this.checkEmail.checkByEmail(subwithouID.email)
+  async createSub (subwithouID: ISubscribe.Params): Promise<ISubscribe.Result> {
+    const exists = await this.find.email(subwithouID)
     if (exists) {
       const uuid = this.addId.uuid()
       const subWithId = { ...subwithouID, id: uuid }
-      const dbResponse = this.add.addSub(subWithId)
+      const dbResponse = this.add.addSubscriber(subWithId)
       return dbResponse
     }
     return exists

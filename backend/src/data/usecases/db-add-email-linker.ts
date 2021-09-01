@@ -1,21 +1,16 @@
-import { IdataEmaillinker } from '../rules/db/account'
-import { EmailLinker } from '../../domain/usecases'
-import { ICheckDbEmailValidator } from '../rules/db/validators/checkDbEmailVAlidator'
+import { IUpdateDataService, ISelectDataService } from '../rules/db/account/linker'
+import { ILinker } from '../../domain/usecases'
 
-export class DbEmailLinker implements EmailLinker {
+export class DbLinkerServices implements ILinker {
   constructor (
-    private readonly linker: IdataEmaillinker,
-    private readonly Email: ICheckDbEmailValidator) {}
+    private readonly select: ISelectDataService,
+    private readonly update: IUpdateDataService) {}
 
-  async link (args: EmailLinker.Params): EmailLinker.Result {
-    console.log(args)
-    const exists = await this.Email.checkEmailByLinker(args.email) //
-    if (!exists) {
-      return false
-    }
+  async checkEmailAndSetDiscordID (args: ILinker.Params): ILinker.Result {
+    const trueOrFalse = await this.select.email(args)
 
-    console.log('argsServices', args)
-    const payload = await this.linker.addLinkerEMail(args)
-    return payload
+    return trueOrFalse
+      ? await this.update.discordId(args)
+      : trueOrFalse
   }
 }

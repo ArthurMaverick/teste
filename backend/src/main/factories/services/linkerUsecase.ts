@@ -1,9 +1,8 @@
-import { DbEmailLinker } from '../../../data/usecases/db-add-email-linker'
-import { AddEmail } from '../../../infra/repository/postgres/repo/insertlinker'
-import { CheckDbLinkerEmailValidator } from '../../../infra/repository/postgres/repo/validations/check-email-linker'
+import { UpdateDbLinkerEmailValidator, FindDbLinkerEmailValidator } from '../../../infra/repository/postgres/repo/'
+import { DbLinkerServices } from '../../../data/usecases/db-add-email-linker'
 
-export const makeLinkerUsecase = (): DbEmailLinker => {
-  const addEmail = new AddEmail()
-  const checkDbLinkerEmailValidator = new CheckDbLinkerEmailValidator()
-  return new DbEmailLinker(addEmail, checkDbLinkerEmailValidator)
+export const makeLinkerUsecase = (): DbLinkerServices => {
+  const findDbLinkerEmailValidator = new FindDbLinkerEmailValidator()
+  const updateDbLinkerEmailValidator = new UpdateDbLinkerEmailValidator()
+  return new DbLinkerServices(findDbLinkerEmailValidator, updateDbLinkerEmailValidator)
 }

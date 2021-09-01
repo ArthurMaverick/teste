@@ -1,5 +1,4 @@
-import { Linker } from './linker'
-import { Entity, PrimaryColumn, Column, JoinColumn, OneToOne } from 'typeorm'
+import { Entity, PrimaryColumn, Column } from 'typeorm'
 
 @Entity('subscriber')
 export class Subscriber {
@@ -18,7 +17,6 @@ export class Subscriber {
   @Column()
   city!: string
 
-  @OneToOne(() => Linker, { eager: true, nullable: true })
-  @JoinColumn()
-  linker: Linker
+  @Column({ nullable: true })
+  discordId?: string
 }

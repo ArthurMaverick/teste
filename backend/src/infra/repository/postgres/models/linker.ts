@@ -1,5 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from 'typeorm'
-import { Login } from './login'
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
 
 @Entity('linker')
 export class Linker {
@@ -8,8 +7,4 @@ export class Linker {
 
   @Column()
   email!: string;
-
-  @OneToOne(() => Login, { eager: true, nullable: true })
-  @JoinColumn()
-  login: Login;
 }

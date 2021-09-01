@@ -1,4 +1,4 @@
-import { EmailLinker } from '../../domain/usecases/linker'
+import { ILinker } from '../../domain/usecases/linker'
 import { Validation, Controller, HttpResponse } from '../rules'
 import { badRequest, forbidden, ok, serverError } from '../helpers/http-helper'
 import { EmailInUseError } from '../errors'
@@ -6,22 +6,19 @@ import { EmailInUseError } from '../errors'
 export class CreateEmailController implements Controller {
   constructor (
     private readonly validation: Validation,
-    private readonly add: EmailLinker
+    private readonly add: ILinker
   ) {}
 
-  async handle (request: EmailLinker.Params): Promise<HttpResponse> {
-    console.log('argsController', request)
+  async handle (request: ILinker.Params): Promise<HttpResponse> {
     try {
       const isValid = this.validation.validate(request)
-      console.log('isValid', isValid)
 
       if (isValid) {
         return badRequest(isValid)
       }
 
-      const payload = await this.add.link(request)
+      const payload = await this.add.checkEmailAndSetDiscordID(request)
       if (!payload) {
-        console.log('argsController1')
         return forbidden(new EmailInUseError())
       }
 

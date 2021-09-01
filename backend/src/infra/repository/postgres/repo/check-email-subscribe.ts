@@ -1,15 +1,12 @@
 import { getRepository } from 'typeorm'
-import { IEmailExists } from '../../../../data/rules/db/account/check-account-by-email-repository'
+import { ISelectSubscriberDataService } from '../../../../data/rules/db/account/subscriber'
 import { Subscriber } from '../models/subscriber'
 
-export class EmailExists implements IEmailExists {
+export class FindDbSubscriberEmailValidator implements ISelectSubscriberDataService {
     private readonly pgSubscribeRepo = getRepository(Subscriber)
 
-    async checkByEmail (email: string): Promise<boolean> {
+    async email (email: ISelectSubscriberDataService.Params):ISelectSubscriberDataService.Result {
       const exists = await this.pgSubscribeRepo.findOne({ where: { email } })
-      if (exists) {
-        return false
-      }
-      return true
+      return !!exists
     }
 }

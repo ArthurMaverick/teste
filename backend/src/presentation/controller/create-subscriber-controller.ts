@@ -1,11 +1,11 @@
 import { Controller, HttpResponse, Validation } from '../rules'
 import { badRequest, serverError, ok, forbidden } from '../helpers/http-helper'
 import { EmailInUseError } from '../errors/email-in-use-error'
-import { Subscribe } from '../../domain/usecases'
+import { ISubscribe } from '../../domain/usecases'
 export class CreateSubscriberController implements Controller {
   constructor (
     private readonly validation: Validation,
-    private readonly dbAddUser: Subscribe
+    private readonly dbAddUser: ISubscribe
 
   ) {}
 

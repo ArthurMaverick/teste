@@ -1,12 +1,12 @@
-import { Subscribe } from '../../../domain/usecases'
-import { DbAddSubscriber } from '../../../data/usecases/db-add-subscriber'
+import { ISubscribe } from '../../../domain/usecases'
+import { DbAddSubscriberServices } from '../../../data/usecases/db-add-subscriber'
 import { AddIdOnRepository } from '../../../infra/criptography/add-id'
-import { EmailExists } from '../../../infra/repository/postgres/repo/check-email-subscribe'
-import { InsertRepository } from '../../../infra/repository/postgres/repo/inserts'
+import { FindDbSubscriberEmailValidator } from '../../../infra/repository/postgres/repo/check-email-subscribe'
+import { InsertSubscriberRepository } from '../../../infra/repository/postgres/repo/insertsSubscriber'
 
-export const SubscriberFactory = (): Subscribe => {
+export const SubscriberFactory = (): ISubscribe => {
   const addUuid = new AddIdOnRepository()
-  const insertSub = new InsertRepository()
-  const checkEmail = new EmailExists()
-  return new DbAddSubscriber(addUuid, checkEmail, insertSub)
+  const findDbSubscriberEmailValidator = new FindDbSubscriberEmailValidator()
+  const insertSubscriberRepository = new InsertSubscriberRepository()
+  return new DbAddSubscriberServices(addUuid, findDbSubscriberEmailValidator, insertSubscriberRepository)
 }

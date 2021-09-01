@@ -1,19 +1,11 @@
-export namespace AddSub {
+import { UserSubscribe } from '../entities/subscribe'
 
-  export type Params = {
-    email: string,
-    name: string,
-    birthData: string,
-    state: string,
-    city: string,
-  }
-
-  export type Result = {
-    name: string,
-    email: string,
-  } | boolean
-
+export interface ISubscribe {
+  createSub: (subscriberInfo: ISubscribe.Params) => Promise<ISubscribe.Result>
 }
-export interface Subscribe {
-  createSub: (subscriberInfo: AddSub.Params) => Promise<AddSub.Result>
+
+export namespace ISubscribe {
+  export type Params = UserSubscribe
+  export type Result = Promise<boolean>
+
 }
