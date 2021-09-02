@@ -1,20 +1,15 @@
-FROM node:14
+FROM node:16.8
 
-RUN useadd --user-group --create-home --shell /bin/false app &&\
-  npm install --global npm@6
+ENV APP=/usr/src/app
 
-ENV HOME=/home/app
+WORKDIR $APP
 
-COPY package.json $HOME/backend/
-RUN chown -R app:app #HOME/*
+COPY package*.json ./ 
 
-USER app
-WORKDIR $HOME/backend
-RUN num cache clean && npm install --silent --progress=false --
+RUN  npm i
 
-USER root 
-COPY . $HOME/backend
-RUN chown -R app:app $HOME/*
-USER app
+COPY . .
 
 CMD ["npm", "start"]
+
+EXPOSE 8000

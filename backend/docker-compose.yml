@@ -1,17 +1,12 @@
 version: '3.1'
 
 services:
-  db:
-    image: 'postgres:latest'
+  app:
+    container_name: test
     restart: always
-    environment:
-      POSTGRES_HOSTNAME: 'localhost'
-      POSTGRES_PASSWORD: 123456
-      POSTGRES_USER: test
-      POSTGRES_DB: panicLobter
-      
+    build: .
     ports:
-      - '5432:5432'  
+      - '8000:8000'  
 
    
    

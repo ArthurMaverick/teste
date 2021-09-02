@@ -8,7 +8,7 @@
     "down": "docker-compose down && rm -rf dist && rm tsconfig.tsbuildinfo",
     "build": "tsc",
     "start:dev": "docker-compose up -d && ts-node-dev --respawn --transpile-only src/main/server.ts",
-    "start": "node dist/main/server.js",
+    "start": "nodemon --exec node dist/main/server.js",
     "test": "jest --watchAll",
     "test:staged": "jest --passWithNoTests",
     "test:ci": "jest --coverage",
@@ -17,8 +17,6 @@
     "typeorm:rever": "npx ts-node-dev --transpile-only ./node_modules/typeorm/cli.js migration:revert",
     "typeorm:gen": "npx ts-node-dev --transpile-only ./node_modules/typeorm/cli.js migration:generate -- -n createClass1",
     "typeorm:cre": "npx ts-node-dev --transpile-only ./node_modules/typeorm/cli.js migration:create -n createClass1"
-
-    
   },
   "keywords": [
     "clean Architecture",
@@ -30,7 +28,6 @@
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
     "@types/express": "^4.17.12",
-    "@types/jest": "^26.0.23",
     "@types/jsonwebtoken": "^8.5.2",
     "@types/node": "^16.7.5",
     "@types/node-fetch": "^2.5.12",
@@ -48,7 +45,6 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
     "jest": "^27.0.4",
-    "ts-jest": "^27.0.3",
     "ts-node-dev": "^1.1.6",
     "typescript": "^4.3.4"
   },
@@ -59,6 +55,7 @@
     "express": "^4.17.1",
     "express-session": "^1.17.2",
     "jsonwebtoken": "^8.5.1",
+    "nodemon": "^2.0.12",
     "passport": "^0.4.1",
     "passport-discord": "^0.1.4",
     "pg": "^8.7.1",
