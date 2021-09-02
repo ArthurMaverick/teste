@@ -23,9 +23,9 @@ export class CreateEmailController implements Controller {
       }
 
       return ok(payload)
-    } catch (err) {
+    } catch (err: any) {
       console.log(err)
-      serverError(err.name)
+      serverError(err)
     }
   }
 }

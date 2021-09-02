@@ -22,7 +22,7 @@ export class CreateSubscriberController implements Controller {
       }
 
       return ok(dataOrNull)
-    } catch (err) {
+    } catch (err: any) {
       console.log(err)
       return serverError(err)
     }

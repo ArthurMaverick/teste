@@ -23,7 +23,7 @@ export class CreateLoginController implements Controller {
       }
 
       return ok(encodedJWT)
-    } catch (err) {
+    } catch (err: any) {
       console.log(err)
       return serverError(err)
     }

@@ -1,6 +1,7 @@
-const path = require('node:path')
-const prodPath = path.join('src', 'infra', 'repository', 'postgres')
 require('dotenv').config()
+const path = require('node:path')
+const prodPath = path.join('dist', 'infra', 'repository', 'postgres')
+const devPath = path.join('src', 'infra', 'repository', 'postgres')
 
 module.exports = [
   {
@@ -12,7 +13,7 @@ module.exports = [
     username: process.env.PROD_USERNAME,
     password: process.env.PROD_PASSWORD,
     database: process.env.PROD_DATABASE,
-    entities: [prodPath + '/models/*.{js,ts}'],
-    migrations: [prodPath + '/postgresMigrations/*.{js,ts}'],
-    cli: { migrationsDir: prodPath + '/postgresMigrations' }
+    entities: [prodPath + '/models/*.js'],
+    migrations: [prodPath + '/postgresMigrations/*.js'],
+    cli: { migrationsDir: devPath + '/postgresMigrations' }
   }]
