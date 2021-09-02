@@ -1,8 +1,8 @@
 export interface Encrypter {
-  encrypter: (plaintext: Encrypter.Params, subject:Encrypter.Params) => Promise<Encrypter.Result>
+  encrypter: (plaintext: Encrypter.Params) => Encrypter.Result
 }
 export namespace Encrypter {
-export type Params = string
+export type Params = string | object | Buffer
 
-export type Result = string
+export type Result = Promise<string>
 }

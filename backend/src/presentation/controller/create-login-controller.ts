@@ -1,6 +1,5 @@
 import { Controller, HttpResponse, Validation } from '../rules'
-import { badRequest, serverError, ok, forbidden } from '../helpers/http-helper'
-import { EmailInUseError } from '../errors/email-in-use-error'
+import { badRequest, serverError, ok, unauthorized } from '../helpers/http-helper'
 import { UserLogin } from '../../domain/usecases'
 export class CreateLoginController implements Controller {
   constructor (
@@ -17,13 +16,13 @@ export class CreateLoginController implements Controller {
         return badRequest(error)
       }
 
-      const dataOrNull = await this.dbAddUser.userLogin(request)
+      const encodedJWT = await this.dbAddUser.userLogin(request)
 
-      if (!dataOrNull) {
-        return forbidden(new EmailInUseError())
+      if (!encodedJWT) {
+        return unauthorized()
       }
 
-      return ok(dataOrNull)
+      return ok(encodedJWT)
     } catch (err) {
       console.log(err)
       return serverError(err)

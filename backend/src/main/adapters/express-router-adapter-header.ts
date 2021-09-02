@@ -12,10 +12,10 @@ export const adaptRouteHeaders = (controller: Controller) => {
 
     if (Number(statuscode) >= 200 && Number(statuscode) <= 299) {
       res.status(Number(statuscode))
-      res.cookie('ids', body, { maxAge: 24 * 60 * 60 })
-      return res.json({ status: 200 })
+      return res.redirect(`http://localhost:3000/board?${body}`)
     } else {
-      res.status(Number(statuscode)).json({ error: body?.message })
+      res.status(Number(statuscode))
+      return res.redirect('http://localhost:3000')
     }
   }
 }
