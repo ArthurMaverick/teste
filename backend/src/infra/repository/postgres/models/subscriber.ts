@@ -6,6 +6,9 @@ export class Subscriber {
   id!: string
 
   @Column()
+  name!: string
+
+  @Column()
   email!: string
 
   @Column()
