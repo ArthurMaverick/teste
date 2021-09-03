@@ -1,7 +1,6 @@
 import React from 'react'
 import { fetchJson } from '../../../services/fetch'
 import { Container } from './styles'
-
 export const SendForm = () => {
   const [title, setTitle] = React.useState<string>('')
   const [images, setImage] = React.useState<string[]>([])
