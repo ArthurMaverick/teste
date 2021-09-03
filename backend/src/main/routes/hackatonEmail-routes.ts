@@ -3,6 +3,5 @@ import { adaptRoute } from '../adapters/express-router-adapter'
 import { makeGetEmailLinker } from '../factories/controllers/getEmailController'
 
 export default (router: Router) => {
-  router.post('/checkeventemail', adaptRoute(makeGetEmailLinker()))
+  router.post('/linker/discord', adaptRoute(makeGetEmailLinker()))
 }
-//

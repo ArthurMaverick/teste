@@ -1,13 +1,10 @@
 FROM node:16.8
 
-ENV APP=/usr/src/app
-
-WORKDIR $APP
+WORKDIR /usr/src/app
 
 COPY package*.json ./ 
 
-RUN  npm i\
-  npm run build
+RUN  npm install 
 
 COPY . .
 
