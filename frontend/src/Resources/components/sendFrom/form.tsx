@@ -1,56 +1,62 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { fetchJson } from '../../../services/fetch'
 import { Container } from './styles'
 export const SendForm = () => {
-  const [title, setTitle] = React.useState<string>('')
-  const [images, setImage] = React.useState<string[]>([])
-  const [categories, setCategory] = React.useState<string[]>([])
-  const [body, setBody] = React.useState<string>('')
+  const [name, setName] = React.useState<string>('')
+  const [email, setEmail] = React.useState<string>('')
+  const [birthData, setBirthData] = React.useState<string>('')
+  const [state, setstd] = React.useState<string>('')
+  const [city, setCity] = React.useState<string>('')
   const [res, setRes] = React.useState<any>(undefined) 
 
- const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault()
-    const option: RequestInit = {
+  const handleSubmit = async (e: React.FormEvent) => {
+     e.preventDefault()
+     const option: RequestInit = {
       method: 'POST',
       body: JSON.stringify({
-        title, 
-        body,
-        images, 
-        categories,
+        name, 
+        email,
+        birthData, 
+        state,
+        city
       }),
       headers: {
         "Content-type": "application/json; charset=UTF-8"
+      }
     }
-    };
-    
-  setRes(await fetchJson('http://localhost:8000/v1/form', option).then(data => JSON.stringify(data))); // params it'll change
-
-  }
+    setRes(await fetchJson('http://localhost:8000/v1/hackaton/sendForm', option).then(data => JSON.stringify(data)));  
+  };
   
-  // some labels will to change to a generic and personalized mode
+
   return (
     <Container>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="title">Titulo:</label>
-          <input type="text" value={title} onChange={(e) => setTitle(e.target.value)}  id="title"/>
+          <label htmlFor="Nome">Nome:</label>
+          <input type="text" value={name} onChange={(e) => setName(e.target.value)}  id="title"/>
       
-          <label htmlFor="images">Imagens:</label>
-          <input type="text" value={images} onChange={(e) => setImage([e.target.value])}  id="images"/>
+          <label htmlFor="E-mail">E-mail:</label>
+          <input type="text" value={email} onChange={(e) => setEmail(e.target.value)}  id="images"/>
         
-          <label htmlFor="category">Categoria:</label>
-          <input type="text" value={categories} onChange={(e) => setCategory([e.target.value])} id="category"/>
+          <label htmlFor="Data de Nascimento">Data de Nascimento:</label>
+          <input type="text" value={birthData} onChange={(e) => setBirthData(e.target.value)} id="category"/>
 
-          <label htmlFor="subject">Conteúdo:</label>
-          <textarea id="subject"  name="subject"  value={body} onChange={(e) => setBody(e.target.value)} placeholder="Write something.." style={{height:'200px'}}></textarea>
-      
+          <label htmlFor="Cidade">Cidade:</label>
+          <input type="text" value={city} onChange={(e) => setCity(e.target.value)} id="category"/>
+
+          <label htmlFor="Estado">Estado:</label>
+          <input type="text" value={state} onChange={(e) => setstd(e.target.value)} id="category"/>
+
+          
+          
           <input type="submit" value="Enviar"/>
         </form>
         <span>{
-        res === undefined
-        ? ''
-        : res
-          ? 'seu artigo foi enviado com sucesso!'
-          : 'nao foi possivel enviar seu artigo'
+          res
+        // res === undefined
+        // ? ''
+        // : res
+        //   ? 'seu artigo foi enviado com sucesso!'
+        //   : 'nao foi possivel enviar seu artigo'
       }</span>
     </Container>
   )
