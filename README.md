@@ -4,7 +4,7 @@
 <h1 align="center">Teste</h1>
 
 
-<div align="center"><img src="https://github.com/ArthurMaverick/teste/blob/main/docs/Flowchart.png"/></div>
+<div align="center"><img src="https://github.com/ArthurMaverick/teste/blob/main/docs/flowChart.png"/></div>
 
 
 
