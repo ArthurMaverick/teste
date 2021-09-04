@@ -10,7 +10,9 @@ type TokensProps = {
       exp: number
     }
     
-export const JWTDecoder = (args: string): TokensProps => {
+export const JWTDecoder = (args: string): TokensProps=> {
+      
       return  jwt_decode(args)
+
  
 }
