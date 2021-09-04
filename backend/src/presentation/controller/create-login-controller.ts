@@ -11,16 +11,10 @@ export class CreateLoginController implements Controller {
   async handle (request: any): Promise<HttpResponse> {
     try {
       const error = this.validation.validate(request)
-
-      if (error) {
-        return badRequest(error)
-      }
+      if (error) { return badRequest(error) }
 
       const encodedJWT = await this.dbAddUser.userLogin(request)
-
-      if (!encodedJWT) {
-        return unauthorized()
-      }
+      if (!encodedJWT) { return unauthorized() }
 
       return ok(encodedJWT)
     } catch (err: any) {
