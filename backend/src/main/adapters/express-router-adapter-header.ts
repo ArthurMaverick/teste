@@ -15,6 +15,7 @@ export const adaptRouteHeaders = (controller: Controller) => {
 
     if (Number(statuscode) >= 200 && Number(statuscode) <= 299) {
       res.status(Number(statuscode))
+
       return res.redirect(`http://localhost:3000/board?p=${body}`)
     } else {
       res.status(Number(statuscode))
