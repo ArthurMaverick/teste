@@ -1,26 +1,18 @@
-import React, { useEffect } from 'react'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import React from 'react'
+import {  useRecoilValue } from 'recoil'
 import { textState } from '../../../context/atoms/tokens'
 import {Heading} from '../../components/heading'
+import {Linker} from '../../components/EmailLinker'
 import {Container} from '../../containers'
 
 
 export const BoardPage = () => {
-  // const [text, setText] = useRecoilState(textState);
-  const todoList = useRecoilValue(textState);
+  const tokens = useRecoilValue(textState);
   
   return (
     <Container>
       <Heading hackaton={true} login={false} logout={true}/>
-      <div>
-        <br />
-        <h1>
-          {todoList.access_token}
-        </h1>
-        <h1>
-          {todoList.discordId}
-        </h1>
-      </div>
+      <Linker discordId={tokens.discordId}/>
     </Container>
   )
 }

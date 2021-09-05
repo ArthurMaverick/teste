@@ -11,15 +11,13 @@ type AGRS = {
   props: string
 }
 
-export default function Dashboard({props=''}: AGRS) {
+export default function Dashboard({props}: AGRS) {
   const [userInfo, setUserInfo] = useState(JWTDecoder(props))
   const setTokens = useSetRecoilState(textState);
   
   useEffect(()=>{
-   
       const keysAndJWT = {...userInfo, props}
       setTokens(keysAndJWT) ,[props, setTokens, userInfo]
-    
     })
 
     const value = useRouter()

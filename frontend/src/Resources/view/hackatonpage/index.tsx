@@ -10,7 +10,7 @@ export const HackatonPage = () => {
   return (
     <Container>
       <Heading hackaton={false} login={true} logout={false}/>
-      <h1>{todoList.code}</h1>
+      {/* <h1>{todoList.code}</h1> */}
       <SendForm/>
     </Container>
   )
